@@ -64,7 +64,7 @@ public class Utilitaires {
 	
 	public static boolean avançable (int a, Colonne colonne, Colonne [] plateau) 
 	{
-		return plateau[(colonne.getNuméro() + a)].getDisponible(colonne.getCouleur());
+		return plateau[(colonne.getNumero() + a)].getDisponible(colonne.getCouleur());
 		
 	}
 	public static void avance (int colonne, int cases, Colonne [] plateau) 
@@ -72,13 +72,13 @@ public class Utilitaires {
 		
 		if (plateau[colonne].getCouleur() == 1 )
 		{
-			if(plateau[colonne].getCol1() ==  plateau[colonne].getNuméro() + cases)
+			if(plateau[colonne].getCol1() ==  plateau[colonne].getNumero() + cases)
 			{
 				plateau[colonne + cases].addPion(plateau[colonne].getPion());
 				plateau[colonne].deletePion();
 				plateau[colonne].setCol1(-1);
 			}
-			if(plateau[colonne].getCol2() ==  plateau[colonne].getNuméro() + cases)
+			if(plateau[colonne].getCol2() ==  plateau[colonne].getNumero() + cases)
 			{
 				plateau[colonne + cases].addPion(plateau[colonne].getPion());
 				plateau[colonne].deletePion();
@@ -103,7 +103,7 @@ public class Utilitaires {
 			if (plateau[i].getCompteur() == 0) {couleur = "";}
 			if (plateau[i].getCouleur() == 1 ) {couleur = "blancs";}
 			if (plateau[i].getCouleur() == 2 ) {couleur = "noirs";}
-			System.out.println("Colonne " + (plateau[i].getNuméro() +1) + " : " + plateau[i].getCompteur() + " pions " + couleur);
+			System.out.println("Colonne " + (plateau[i].getNumero() +1) + " : " + plateau[i].getCompteur() + " pions " + couleur);
 		}
 	}
 	

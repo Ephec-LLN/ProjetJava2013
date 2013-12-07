@@ -2,15 +2,15 @@ package backgammon;
 
 public class Colonne {
 
-	private int numéro = 0;
+	private int numero = 0;
 	private Pion [] pions = new Pion[5];
 	private int compteur = 0;
 	private int couleur;
 	private int col1 = 0, col2 = 0;
 	
-	public Colonne (int numéro)
+	public Colonne (int numero)
 	{
-		this.setNuméro(numéro);
+		this.setNumero(numero);
 	}
 	
 	public boolean getDisponible(int a) 
@@ -41,14 +41,14 @@ public class Colonne {
 		return compteur == 0 || compteur <= 5 && couleur == pion.getCouleur();
 	}
 
-	public int getNuméro() 
+	public int getNumero() 
 	{
-		return numéro;
+		return numero;
 	}
 
-	public void setNuméro(int numéro) 
+	public void setNumero(int numero) 
 	{
-		this.numéro = numéro;
+		this.numero = numero;
 	}
 
 	public int getCouleur() 

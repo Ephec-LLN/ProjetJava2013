@@ -90,7 +90,7 @@ public class Graphisme extends JFrame implements ActionListener{
 			if (plateau[i].getCompteur() == 0) {couleur = "";}
 			if (plateau[i].getCouleur() == 1 ) {couleur = "blancs";}
 			if (plateau[i].getCouleur() == 2 ) {couleur = "noirs";}
-			String ligne = "Colonne " + (plateau[i].getNuméro() +1) + " : " + plateau[i].getCompteur() + " pions " + couleur + "\n";
+			String ligne = "Colonne " + (plateau[i].getNumero() +1) + " : " + plateau[i].getCompteur() + " pions " + couleur + "\n";
 			retour = retour + ligne;
 		}
 		return retour;
