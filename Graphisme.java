@@ -3,10 +3,12 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -22,15 +24,15 @@ public class Graphisme extends JFrame implements ActionListener{
 	public Jeu jeu;
 	private int a,b,c;
 	private Colonne[] plateau;
-	
-	
+	private int colSelec;
+	private JFrame fen;
 	public Graphisme (int a, int b, int c, Colonne[] plateau)
 	{
 		this.a = a;
 		this.b = b;
 		this.c = c;
 		this.plateau = plateau;
-		JFrame fen = new JFrame("Backgammon");		
+		fen = new JFrame("Backgammon");		
 		fen.setVisible(true);
 		
 		
@@ -47,6 +49,7 @@ public class Graphisme extends JFrame implements ActionListener{
 		{
 			colonnes[i] = new JButton("Colonne : " + i);
 			boutonsColonnes.add(colonnes[i]);
+			colonnes[i].addActionListener(this);
 		}
 		
 		plateauGraphique.setText(affichage(plateau));
@@ -119,7 +122,31 @@ public class Graphisme extends JFrame implements ActionListener{
 			plateauGraphique.setText(affichage(plateau));
 			
 		}
-		
+		if (arg0.getSource() == colonnes[1])
+		{
+			Object[] options = {"Colonne " + plateau[1].getCol1(), "Colonne " + plateau[1].getCol2(), "Annuler"};
+			int n = JOptionPane.showOptionDialog(fen,
+				    "Sur quelle colonne voulez-vous débarquer ? ", "Quelle case ?",
+				    	    JOptionPane.DEFAULT_OPTION,
+				    	    JOptionPane.QUESTION_MESSAGE,
+				    	    null,
+				    	    options,
+				    	    options[2]);
+			System.out.println(n);
+			if (n == 0) 
+			{
+				plateau = Utilitaires.avance(1, plateau[1].getCol1(), plateau);
+				plateau = Utilitaires.scannage(plateau, 1, b, b);
+				plateauGraphique.setText(affichage(plateau));
+			}
+			if (n == 1) 
+			{
+				plateau = Utilitaires.avance(1, plateau[1].getCol2(), plateau);
+				plateau = Utilitaires.scannage(plateau, 1, a, a);
+				plateauGraphique.setText(affichage(plateau));
+			}
+			
+		}
 	} 
 
 }

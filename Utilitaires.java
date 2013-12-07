@@ -67,11 +67,15 @@ public class Utilitaires {
 		return plateau[(colonne.getNumero() + a)].getDisponible(colonne.getCouleur());
 
 	}
-	public static void avance (int colonne, int cases, Colonne [] plateau) 
+	public static Colonne[] avance (int colonne, int cases, Colonne [] plateau1) 
 	{
-
+		Colonne [] plateau = plateau1;
 		if (plateau[colonne].getCouleur() == 1 )
 		{
+			plateau[colonne + cases].addPion(plateau[colonne].getPion());
+			plateau[colonne].deletePion();
+			
+			
 			if(plateau[colonne].getCol1() ==  plateau[colonne].getNumero() + cases)
 			{
 				plateau[colonne + cases].addPion(plateau[colonne].getPion());
@@ -92,6 +96,8 @@ public class Utilitaires {
 			plateau[colonne - cases].addPion(plateau[colonne].getPion());
 			plateau[colonne].deletePion();
 		}
+		return plateau;
+		
 
 	}
 

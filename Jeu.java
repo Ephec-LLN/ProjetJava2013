@@ -38,18 +38,7 @@ public class Jeu {
 		b = 0;
 		Colonne [] plateau = Utilitaires.initialisation();
 		Jeu jeu = new Jeu(a,b,c,plateau);
-		
-		if (a==b) {c = 2;}
-		
-		
-		
-
-	    plateau = Utilitaires.scannage(plateau, 1, 3, 2);
-	    Utilitaires.avance(1, 5, plateau);
-	    Utilitaires.avance(1, 5, plateau);
-		System.out.println(plateau[1].getCol1());
-		System.out.println(plateau[1].getCol2());
-		
+	
 		Utilitaires.affiche(plateau);
 	
 		

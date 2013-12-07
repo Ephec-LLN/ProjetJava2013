@@ -3,7 +3,7 @@ package backgammon;
 public class Colonne {
 
 	private int numero = 0;
-	private Pion [] pions = new Pion[5];
+	private Pion [] pions = new Pion[10];
 	private int compteur = 0;
 	private int couleur;
 	private int col1 = 0, col2 = 0;
