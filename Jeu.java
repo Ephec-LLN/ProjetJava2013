@@ -1,5 +1,5 @@
 package backgammon;
-import java.util.Random;
+
 
 
 public class Jeu {
@@ -7,6 +7,7 @@ public class Jeu {
 	public  int a,b,c;
 	public  Colonne[] plateau;
 	public Graphisme g;
+	public int couleur;
 	public Jeu (int a, int b, int c, Colonne [] plateau) 
 	{
 		this.a = a;
@@ -16,8 +17,15 @@ public class Jeu {
 	    g = new Graphisme(a,b,c,plateau);
 		
 	}
+	public int getCouleur() {
+		return couleur;
+	}
+	public void setCouleur(int couleur) {
+		this.couleur = couleur;
+	}
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		
 		
 		int a,b,c;
@@ -26,6 +34,8 @@ public class Jeu {
 		a = Utilitaires.roll();
 		b = Utilitaires.roll();
 		c = 1;
+		a = 0;
+		b = 0;
 		Colonne [] plateau = Utilitaires.initialisation();
 		Jeu jeu = new Jeu(a,b,c,plateau);
 		

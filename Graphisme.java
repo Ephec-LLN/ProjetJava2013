@@ -1,9 +1,6 @@
 package backgammon;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,15 +11,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 
+@SuppressWarnings("serial")
 public class Graphisme extends JFrame implements ActionListener{
 
-	public JButton bouton1 = new JButton("Lancer");
+	public JButton bouton1 = new JButton("Lancer les dés");
+	public JButton[] colonnes = new JButton[26];
 	public JButton bouton2 = new JButton("Bouton2");
 	JLabel des;
 	JTextArea plateauGraphique = new JTextArea();
 	public Jeu jeu;
 	private int a,b,c;
 	private Colonne[] plateau;
+	
+	
 	public Graphisme (int a, int b, int c, Colonne[] plateau)
 	{
 		this.a = a;
@@ -38,8 +39,16 @@ public class Graphisme extends JFrame implements ActionListener{
 
 		bouton1.addActionListener(this);
 		bouton2.addActionListener(this);
-
-	
+		JPanel boutonsColonnes = new JPanel();
+		GridLayout boutonsLayout = new GridLayout(13,2);
+		boutonsColonnes.setLayout(boutonsLayout);
+		
+		for (int i = 0; i< 26; i++)
+		{
+			colonnes[i] = new JButton("Colonne : " + i);
+			boutonsColonnes.add(colonnes[i]);
+		}
+		
 		plateauGraphique.setText(affichage(plateau));
 
 		des = new JLabel(a + " " + b);
@@ -50,9 +59,10 @@ public class Graphisme extends JFrame implements ActionListener{
 
 		pan.add(des,BorderLayout.SOUTH);
 		pan.add(plateauGraphique,BorderLayout.CENTER);
+		pan.add(boutonsColonnes,BorderLayout.EAST);
 
 		fen.add(pan);
-		fen.setSize(1280, 900);
+		fen.setSize(1024, 768);
 		fen.setResizable(false);
 		this.pack();
 	}
@@ -90,7 +100,8 @@ public class Graphisme extends JFrame implements ActionListener{
 			if (plateau[i].getCompteur() == 0) {couleur = "";}
 			if (plateau[i].getCouleur() == 1 ) {couleur = "blancs";}
 			if (plateau[i].getCouleur() == 2 ) {couleur = "noirs";}
-			String ligne = "Colonne " + (plateau[i].getNumero() +1) + " : " + plateau[i].getCompteur() + " pions " + couleur + "\n";
+			String ligne = plateau[i].toString() + " : " + 
+			plateau[i].getCompteur() + " pions " + couleur + plateau[i].colonnesPossibles() + "\n" ;
 			retour = retour + ligne;
 		}
 		return retour;
@@ -103,11 +114,12 @@ public class Graphisme extends JFrame implements ActionListener{
 			b = Utilitaires.roll();
 			des.setText(a + " " + b);
 			System.out.println("Clic");
+			
+			plateau = Utilitaires.scannage(plateau, 1, a, b);
+			plateauGraphique.setText(affichage(plateau));
+			
 		}
-		if (arg0.getSource() == bouton2)
-		{
-			System.out.println("Bouton 2 cliquÈ");
-		}
+		
 	} 
 
 }

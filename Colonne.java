@@ -87,4 +87,17 @@ public class Colonne {
 		return pions[compteur -1];
 	}
 
+	public String toString() 
+	{
+		if (numero == 0) {return "Colonne de départ des blancs";}
+		if (numero == 25) {return "Colonne de départ des noirs";}
+		
+		return "Colonne " + numero;
+	}
+	public String colonnesPossibles () 
+	{
+		
+		return "Colonnes possibles : " + col1 + " " + col2;
+		
+	}
 }
