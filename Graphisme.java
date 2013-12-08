@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 
-@SuppressWarnings("serial")
+
 public class Graphisme extends JFrame implements ActionListener{
 
 	public JButton bouton1 = new JButton("Lancer les dés");
@@ -24,16 +24,19 @@ public class Graphisme extends JFrame implements ActionListener{
 	public Jeu jeu;
 	private int a,b,c;
 	private Colonne[] plateau;
-	private int colSelec;
 	private JFrame fen;
-	public Graphisme (int a, int b, int c, Colonne[] plateau)
+	private int couleur = 1;
+	private Joueur[] joueurs = new Joueur[2];
+	
+	public Graphisme (int a, int b, Colonne[] plateau, Joueur joueur1, Joueur joueur2)
 	{
 		this.a = a;
 		this.b = b;
-		this.c = c;
 		this.plateau = plateau;
 		fen = new JFrame("Backgammon");		
 		fen.setVisible(true);
+		joueurs[0] = joueur1;
+		joueurs[1] = joueur2;
 		
 		
 
@@ -96,7 +99,7 @@ public class Graphisme extends JFrame implements ActionListener{
 
 	public  String affichage (Colonne [] plateau) 
 	{
-		String retour = " ";
+		String retour = "C'est au tour de : " + joueurs[couleur - 1].getPseudonyme() + " de jouer \n";
 		for (int i = 0; i < 26; i++) 
 		{
 			String couleur = "";
@@ -104,7 +107,7 @@ public class Graphisme extends JFrame implements ActionListener{
 			if (plateau[i].getCouleur() == 1 ) {couleur = "blancs";}
 			if (plateau[i].getCouleur() == 2 ) {couleur = "noirs";}
 			String ligne = plateau[i].toString() + " : " + 
-			plateau[i].getCompteur() + " pions " + couleur + plateau[i].colonnesPossibles() + "\n" ;
+			plateau[i].getCompteur() + " pions " + couleur + plateau[i].colonnesPossibles(plateau, this.couleur) + "\n" ;
 			retour = retour + ligne;
 		}
 		return retour;
@@ -112,7 +115,7 @@ public class Graphisme extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {      
 		if (arg0.getSource() == bouton1) {
 
-
+			plateau = Utilitaires.scannage(plateau, 1, 0, 0);
 			a = Utilitaires.roll();
 			b = Utilitaires.roll();
 			des.setText(a + " " + b);
@@ -146,6 +149,34 @@ public class Graphisme extends JFrame implements ActionListener{
 				plateauGraphique.setText(affichage(plateau));
 			}
 			
+		}
+		for (int i = 1; i < 25; i++)
+		{
+			if (arg0.getSource() == colonnes[i])
+			{
+				Object[] options = {"Colonne " + plateau[i].getCol1(), "Colonne " + plateau[i].getCol2(), "Annuler"};
+				int n = JOptionPane.showOptionDialog(fen,
+					    "Sur quelle colonne voulez-vous débarquer ? ", "Quelle case ?",
+					    	    JOptionPane.DEFAULT_OPTION,
+					    	    JOptionPane.QUESTION_MESSAGE,
+					    	    null,
+					    	    options,
+					    	    options[2]);
+				System.out.println(n);
+				if (n == 0) 
+				{
+					plateau = Utilitaires.avance(1, plateau[i].getCol1(), plateau);
+					plateau = Utilitaires.scannage(plateau, 1, b, b);
+					plateauGraphique.setText(affichage(plateau));
+				}
+				if (n == 1) 
+				{
+					plateau = Utilitaires.avance(1, plateau[i].getCol2(), plateau);
+					plateau = Utilitaires.scannage(plateau, 1, a, a);
+					plateauGraphique.setText(affichage(plateau));
+				}
+				
+			}
 		}
 	} 
 

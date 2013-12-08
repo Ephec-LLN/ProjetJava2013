@@ -4,17 +4,21 @@ package backgammon;
 
 public class Jeu {
 
-	public  int a,b,c;
+	public  int a,b;
 	public  Colonne[] plateau;
 	public Graphisme g;
 	public int couleur;
-	public Jeu (int a, int b, int c, Colonne [] plateau) 
+	private Joueur joueur1, joueur2;
+	
+	public Jeu (int a, int b, Colonne [] plateau, Joueur joueur1, Joueur joueur2) 
 	{
 		this.a = a;
 		this.b = b;
-		this.c = c;
 		this.plateau = plateau;
-	    g = new Graphisme(a,b,c,plateau);
+		this.joueur1 = joueur1;
+		this.joueur2 = joueur2;
+		
+	    g = new Graphisme(a,b,plateau, joueur1, joueur2);
 		
 	}
 	public int getCouleur() {
@@ -27,17 +31,14 @@ public class Jeu {
 	public static void main(String[] args) {
 		
 		
+		Joueur joueur1 = new Joueur("Amellal Lecteur", 1);
+		Joueur joueur2 = new Joueur("John, attends", 2);
 		
 		int a,b,c;
-      
-		
-		a = Utilitaires.roll();
-		b = Utilitaires.roll();
-		c = 1;
-		a = 0;
-		b = 0;
+		a = 1;
+		b = 1;
 		Colonne [] plateau = Utilitaires.initialisation();
-		Jeu jeu = new Jeu(a,b,c,plateau);
+		Jeu jeu = new Jeu(a,b,plateau, joueur1, joueur2);
 	
 		Utilitaires.affiche(plateau);
 	
@@ -62,12 +63,7 @@ public class Jeu {
 	public void setB(int b) {
 		this.b = b;
 	}
-	public int getC() {
-		return c;
-	}
-	public void setC(int c) {
-		this.c = c;
-	}
+
 	public Colonne[] getPlateau() {
 		return plateau;
 	}

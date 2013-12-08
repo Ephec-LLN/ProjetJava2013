@@ -7,6 +7,7 @@ public class Joueur
 	private int pionsActifs;
 	private int pionsRetraites;
 	private int couleur;
+	private boolean jouable;
 	
 	public Joueur (String pseudonyme, int couleur) 
 	{
@@ -45,6 +46,14 @@ public class Joueur
 
 	public void setPionsRetraites(int pionsRetraites) {
 		this.pionsRetraites = pionsRetraites;
+	}
+
+	public boolean isJouable() {
+		return jouable;
+	}
+
+	public void setJouable(boolean jouable) {
+		this.jouable = jouable;
 	}
 
 }

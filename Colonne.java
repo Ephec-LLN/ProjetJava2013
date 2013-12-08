@@ -94,10 +94,15 @@ public class Colonne {
 		
 		return "Colonne " + numero;
 	}
-	public String colonnesPossibles () 
+	public String colonnesPossibles (Colonne [] plateau, int couleur) 
 	{
+		String retour = "Colonnes possibles : ";
+		if (Utilitaires.avancable(col1, plateau) && col1 != numero && this.couleur == couleur) { retour = retour + col1 + " ";}
+		if (Utilitaires.avancable(col2, plateau) && col2 != numero && this.couleur == couleur) { retour = retour + col2;}
 		
-		return "Colonnes possibles : " + col1 + " " + col2;
+		
+		
+		return retour;
 		
 	}
 }

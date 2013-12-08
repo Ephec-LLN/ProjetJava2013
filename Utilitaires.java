@@ -62,9 +62,10 @@ public class Utilitaires {
 		return (rnd.nextInt(6) + 1);
 	}
 
-	public static boolean avançable (int a, Colonne colonne, Colonne [] plateau) 
+	public static boolean avancable (int a, Colonne [] plateau) 
 	{
-		return plateau[(colonne.getNumero() + a)].getDisponible(colonne.getCouleur());
+		if (a > 24) {return true;}
+		return plateau[(a)].getDisponible(plateau[a].getCouleur());
 
 	}
 	public static Colonne[] avance (int colonne, int cases, Colonne [] plateau1) 
