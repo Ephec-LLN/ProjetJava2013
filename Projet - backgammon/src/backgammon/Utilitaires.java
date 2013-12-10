@@ -68,7 +68,7 @@ public class Utilitaires {
 		return plateau[(a)].getDisponible(plateau[a].getCouleur());
 
 	}
-	public static Colonne[] avance (int colonne, int cases, Colonne [] plateau1) 
+	public static Colonne[] avance3 (int colonne, int cases, Colonne [] plateau1) 
 	{
 		Colonne [] plateau = plateau1;
 		if (plateau[colonne].getCouleur() == 1 )
@@ -102,6 +102,14 @@ public class Utilitaires {
 
 	}
 
+	public static Colonne[] avance2(int colonne, int cases, Colonne [] plateau) 
+	{
+		Colonne[] plateau1 = plateau;
+		plateau1[colonne + cases -1].addPion(plateau[colonne].getPion());
+		plateau1[colonne].deletePion();
+		
+		return plateau1;
+	}
 	public static void affiche (Colonne [] plateau) 
 	{
 		for (int i = 0; i < 26; i++) 
@@ -146,6 +154,8 @@ public class Utilitaires {
 
 
 		}
+		
+		
 		return retour;
 	}
 }

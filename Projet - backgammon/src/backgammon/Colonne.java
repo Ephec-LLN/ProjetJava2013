@@ -7,6 +7,7 @@ public class Colonne {
 	private int compteur = 0;
 	private int couleur;
 	private int col1 = 0, col2 = 0;
+	private boolean amovible = false;
 	
 	public Colonne (int numero)
 	{
@@ -105,4 +106,19 @@ public class Colonne {
 		return retour;
 		
 	}
+
+	public boolean isAmovible(int couleur) {
+		
+		if (this.couleur != couleur || col1 == numero && col2 == numero) {return false;}
+		return true;
+	}
+
+	public void setAmovible(boolean amovible) {
+		this.amovible = amovible;
+	}
+	public void setCompteur(int compteur) {
+		this.compteur = compteur;
+	}
+
+	
 }

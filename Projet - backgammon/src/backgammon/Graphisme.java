@@ -53,6 +53,7 @@ public class Graphisme extends JFrame implements ActionListener{
 			colonnes[i] = new JButton("Colonne : " + i);
 			boutonsColonnes.add(colonnes[i]);
 			colonnes[i].addActionListener(this);
+			colonnes[i].setEnabled(false);
 		}
 		
 		plateauGraphique.setText(affichage(plateau));
@@ -122,34 +123,11 @@ public class Graphisme extends JFrame implements ActionListener{
 			System.out.println("Clic");
 			
 			plateau = Utilitaires.scannage(plateau, 1, a, b);
+			boutonsAdaptation();
 			plateauGraphique.setText(affichage(plateau));
-			
+			bouton1.setEnabled(false);
 		}
-		if (arg0.getSource() == colonnes[1])
-		{
-			Object[] options = {"Colonne " + plateau[1].getCol1(), "Colonne " + plateau[1].getCol2(), "Annuler"};
-			int n = JOptionPane.showOptionDialog(fen,
-				    "Sur quelle colonne voulez-vous débarquer ? ", "Quelle case ?",
-				    	    JOptionPane.DEFAULT_OPTION,
-				    	    JOptionPane.QUESTION_MESSAGE,
-				    	    null,
-				    	    options,
-				    	    options[2]);
-			System.out.println(n);
-			if (n == 0) 
-			{
-				plateau = Utilitaires.avance(1, plateau[1].getCol1(), plateau);
-				plateau = Utilitaires.scannage(plateau, 1, b, b);
-				plateauGraphique.setText(affichage(plateau));
-			}
-			if (n == 1) 
-			{
-				plateau = Utilitaires.avance(1, plateau[1].getCol2(), plateau);
-				plateau = Utilitaires.scannage(plateau, 1, a, a);
-				plateauGraphique.setText(affichage(plateau));
-			}
-			
-		}
+	
 		for (int i = 1; i < 25; i++)
 		{
 			if (arg0.getSource() == colonnes[i])
@@ -165,19 +143,29 @@ public class Graphisme extends JFrame implements ActionListener{
 				System.out.println(n);
 				if (n == 0) 
 				{
-					plateau = Utilitaires.avance(1, plateau[i].getCol1(), plateau);
+					plateau = Utilitaires.avance2(1, plateau[i].getCol1(), plateau);
 					plateau = Utilitaires.scannage(plateau, 1, b, b);
 					plateauGraphique.setText(affichage(plateau));
+					boutonsAdaptation();
 				}
 				if (n == 1) 
 				{
-					plateau = Utilitaires.avance(1, plateau[i].getCol2(), plateau);
+					plateau = Utilitaires.avance2(1, plateau[i].getCol2(), plateau);
 					plateau = Utilitaires.scannage(plateau, 1, a, a);
 					plateauGraphique.setText(affichage(plateau));
+					boutonsAdaptation();
 				}
 				
 			}
 		}
 	} 
-
+	public void boutonsAdaptation () 
+	{
+		for (int i = 0; i < 26; i++)
+		{
+			if (plateau[i].getCouleur() == couleur) {colonnes[i].setEnabled(plateau[i].isAmovible(couleur));}
+			
+		}
+		
+	}
 }
