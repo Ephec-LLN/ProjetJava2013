@@ -19,11 +19,11 @@ public class Colonne {
 		return (compteur <= 1 || a == couleur);
 	}
 	
-	public void addPion(Pion pion) 
+	public void addPion(Pion pion,int couleur) 
 	{
 		pions[compteur] = pion;
 		compteur ++;
-		setCouleur(pion.getCouleur());
+		setCouleur(couleur);
 		
 	}
 	
@@ -34,6 +34,7 @@ public class Colonne {
 		if(compteur == 0) 
 		{
 			couleur = 0;
+			amovible = false;
 		}
 	}
 	
@@ -109,6 +110,7 @@ public class Colonne {
 
 	public boolean isAmovible(int couleur) {
 		
+		if(compteur == 0) {return false;}
 		if (this.couleur != couleur || col1 == numero && col2 == numero) {return false;}
 		return true;
 	}
