@@ -114,8 +114,15 @@ public class Graphisme extends JFrame implements ActionListener{
 			plateau[i].getCompteur() + " pions " + couleur + plateau[i].colonnesPossibles(plateau, this.couleur) + "\n" ;
 			retour = retour + ligne;
 		}
+		retour += "Pions blancs arrivés : " + joueurs[0].getPionsRetraites() + "\n";
+		retour += "Pions noirs arrivés : " + joueurs[1].getPionsRetraites() + "\n";
 		return retour;
 	}
+	public Joueur[] getJoueurs() {
+		return joueurs;
+	}
+
+
 	public void actionPerformed(ActionEvent arg0) {      
 		if (arg0.getSource() == bouton1) {
 
@@ -124,15 +131,13 @@ public class Graphisme extends JFrame implements ActionListener{
 			b = Utilitaires.roll();
 			if (a == b) {c = 4;} else {c = 2;}
 			des.setText(a + " " + b);
-			System.out.println("Clic");
-			
 			plateau = Utilitaires.scannage(plateau, couleur, a, b);
 			boutonsAdaptation();
 			plateauGraphique.setText(affichage(plateau));
 			bouton1.setEnabled(false);
 		}
 	
-		for (int i = 1; i < 25; i++)
+		for (int i = 0; i < 25; i++)
 		{
 			if (arg0.getSource() == colonnes[i])
 			{
@@ -147,8 +152,8 @@ public class Graphisme extends JFrame implements ActionListener{
 				
 				if (n == 0) 
 				{
-					if (couleur == 1) {plateau = Utilitaires.avance2(i, (a + 1), plateau, couleur);}
-					else {plateau = Utilitaires.avance2(i, (a + 1), plateau, couleur);}
+					if (couleur == 1) {plateau = Utilitaires.avance2(i, (a + 1), plateau, joueurs[couleur - 1]);}
+					else {plateau = Utilitaires.avance2(i, (a + 1), plateau, joueurs[couleur - 1]);}
 					plateau = Utilitaires.scannage(plateau, couleur, b, b);
 					a = b;
 					plateauGraphique.setText(affichage(plateau));
@@ -157,8 +162,8 @@ public class Graphisme extends JFrame implements ActionListener{
 				}
 				if (n == 1) 
 				{
-					if (couleur == 1) {plateau = Utilitaires.avance2(i, (b + 1), plateau, couleur);}
-					else {plateau = Utilitaires.avance2(i, (b + 1), plateau, couleur);}
+					if (couleur == 1) {plateau = Utilitaires.avance2(i, (b + 1), plateau, joueurs[couleur - 1]);}
+					else {plateau = Utilitaires.avance2(i, (b + 1), plateau, joueurs[couleur - 1]);}
 					plateau = Utilitaires.scannage(plateau, couleur, a, a);
 					b = a;
 					plateauGraphique.setText(affichage(plateau));
@@ -171,11 +176,12 @@ public class Graphisme extends JFrame implements ActionListener{
 	} 
 	public void boutonsAdaptation () 
 	{
-		System.out.println( "valeur de c : " + c);
+		
 		for (int i = 0; i < 26; i++)
 		{
 			if(Utilitaires.avancable(i, plateau) && plateau[i].getCouleur() == couleur) {colonnes[i].setEnabled(true);}
 			else {colonnes[i].setEnabled(false);}
+			if ((plateau[i].getCol1() == 0 && plateau[i].getCol2() == 0) ||(plateau[i].getCol1() == i && plateau[i].getCol2() == i)) {colonnes[i].setEnabled(false);}
 			
 		}
 		if (c == 0) 

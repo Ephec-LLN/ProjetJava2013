@@ -40,7 +40,7 @@ public class Jeu {
 		Colonne [] plateau = Utilitaires.initialisation();
 		Jeu jeu = new Jeu(a,b,plateau, joueur1, joueur2);
 	
-		Utilitaires.affiche(plateau);
+		
 	
 		
 		

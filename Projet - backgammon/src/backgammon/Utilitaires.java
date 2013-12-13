@@ -65,61 +65,74 @@ public class Utilitaires {
 	public static boolean avancable (int a, Colonne [] plateau) 
 	{
 		if (a > 24) {return true;}
+		if (a <0) {return true;}
 		return plateau[(a)].getDisponible(plateau[a].getCouleur());
 
 	}
-	public static Colonne[] avance3 (int colonne, int cases, Colonne [] plateau1) 
+
+
+	public static Colonne[] avance2(int colonne, int cases, Colonne [] plateau, Joueur joueur) 
 	{
-		Colonne [] plateau = plateau1;
-		if (plateau[colonne].getCouleur() == 1 )
-		{
-			plateau[colonne + cases].addPion(plateau[colonne].getPion(),1);
-			plateau[colonne].deletePion();
-			
-			
-			if(plateau[colonne].getCol1() ==  plateau[colonne].getNumero() + cases)
-			{
-				plateau[colonne + cases].addPion(plateau[colonne].getPion(),1);
-				plateau[colonne].deletePion();
-				plateau[colonne].setCol1(-1);
-			}
-			if(plateau[colonne].getCol2() ==  plateau[colonne].getNumero() + cases)
-			{
-				plateau[colonne + cases].addPion(plateau[colonne].getPion(),1);
-				plateau[colonne].deletePion();
-				plateau[colonne].setCol2(-1);
-			}
 
-		}
+		Colonne[] plateau1 = plateau;
 
-		if (plateau[colonne].getCouleur() == 2)
+		switch (joueur.getCouleur())
 		{
-			plateau[colonne - cases].addPion(plateau[colonne].getPion(),1);
-			plateau[colonne].deletePion();
+		case 1 : 	if(colonne + cases - 1 > 24 ) 
+		{
+			plateau1[colonne].deletePion();
+			joueur.setPionsRetraites(joueur.getPionsRetraites() + 1); 
+			break;
 		}
-		return plateau;
+		if (plateau1[colonne + cases - 1].getCompteur() == 1 && plateau1[colonne + cases - 1].getCouleur() != joueur.getCouleur())
+		{
+			caseDepart(plateau1, colonne + cases - 1, joueur.getCouleur());
+			
+		}
+		plateau1[colonne + cases -1].addPion(plateau[colonne].getPion(),joueur.getCouleur());
+		plateau1[colonne].deletePion(); break;
+
+		case 2 :  	if(colonne - cases  < 0 ) 
+					{
+					plateau1[colonne].deletePion();
+					joueur.setPionsRetraites(joueur.getPionsRetraites() + 1); 
+					break;}
 		
+					if (plateau1[colonne - cases + 1].getCompteur() == 1 && plateau1[colonne - cases + 1].getCouleur() != joueur.getCouleur())
+					{
+					caseDepart(plateau1, colonne - cases + 1, joueur.getCouleur());
+					
+					
+					} 
+		plateau1[colonne - cases +1].addPion(plateau[colonne].getPion(),joueur.getCouleur());
+		plateau1[colonne].deletePion();
+		}
+		
+		return plateau1;
 
 	}
 
 	public static Colonne[] avance2(int colonne, int cases, Colonne [] plateau, int couleur) 
 	{
-		
-			Colonne[] plateau1 = plateau;
-			
-			switch (couleur)
-			{
-			case 1 : 	plateau1[colonne + cases -1].addPion(plateau[colonne].getPion(),couleur);
-						plateau1[colonne].deletePion(); break;
-						
-			case 2 :  	plateau1[colonne - cases +1].addPion(plateau[colonne].getPion(),couleur);
-						plateau1[colonne].deletePion();
-						System.out.println(plateau[colonne - cases +1].getCompteur());
-			}
-			return plateau1;
-		
+
+		Colonne[] plateau1 = plateau;
+
+		switch (couleur)
+		{
+		case 1 : 	
+			plateau1[colonne + cases -1].addPion(plateau[colonne].getPion(),couleur);
+			plateau1[colonne].deletePion(); break;
+
+		case 2 :  	plateau1[colonne - cases +1].addPion(plateau[colonne].getPion(),couleur);
+		plateau1[colonne].deletePion();
+		System.out.println(plateau[colonne - cases +1].getCompteur());
+		}
+		System.out.println("Pions en place : " + plateau[colonne + cases - 1].getCompteur() + plateau[colonne + cases - 1].getDisponible(couleur));
+		System.out.println("Colonnes dispos : " + plateau[colonne + cases - 1].getCol1() + " " +  plateau[colonne + cases - 1].getCol1());
+
+		return plateau1;
+
 	}
-	
 	public static void affiche (Colonne [] plateau) 
 	{
 		for (int i = 0; i < 26; i++) 
@@ -136,7 +149,7 @@ public class Utilitaires {
 	public static Colonne [] scannage (Colonne [] plateau, int couleur, int roll1, int roll2) 
 	{
 		Colonne[] retour = plateau;
-		
+
 		switch(couleur) {
 		case 1 : 
 			for (int i  = 0; i < 26; i++) 
@@ -163,14 +176,14 @@ public class Utilitaires {
 					}
 				}
 			}
-		break;
-		
+			break;
+
 		case 2 : 
 			for (int i  = 0; i < 26; i++) 
 			{
 				if (retour[i].getCouleur() == couleur && retour[i].getCompteur() != 0)
 				{
-					if (i - roll1 <= 0) {retour[i].setCol1(0);}
+					if (i - roll1 <= 0) {retour[i].setCol1(-1);}
 					else {
 
 						if (retour[i - roll1].getDisponible(couleur)) 
@@ -178,7 +191,7 @@ public class Utilitaires {
 							retour[i].setCol1(i - roll1);
 						}
 					}
-					if (i - roll2 <= 0) {retour[i].setCol2(0);}
+					if (i - roll2 <= 0) {retour[i].setCol2(-1);}
 					else {
 
 						if ( retour[i - roll2].getDisponible(couleur))
@@ -190,9 +203,18 @@ public class Utilitaires {
 					}
 				}
 			}
-			
-	}
+
+		}
 		return retour;
 	}
-	
+	public static  Colonne[] caseDepart(Colonne [] plateau, int colonne, int couleur) 
+	{
+		Colonne [] plateau1 = plateau;
+		switch (couleur) 
+		{
+		case 1 : plateau1[25].addPion(plateau1[colonne].getPion(), 2); plateau1[colonne].deletePion(); break;
+		case 2 : plateau1[0].addPion(plateau1[colonne].getPion(), 1); plateau1[colonne].deletePion();
+		}
+		return plateau1;
+	} 
 }

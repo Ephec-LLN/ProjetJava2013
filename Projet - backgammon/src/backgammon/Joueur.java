@@ -8,6 +8,7 @@ public class Joueur
 	private int pionsRetraites;
 	private int couleur;
 	private boolean jouable;
+	private boolean arrivable = true;
 	
 	public Joueur (String pseudonyme, int couleur) 
 	{
@@ -54,6 +55,14 @@ public class Joueur
 
 	public void setJouable(boolean jouable) {
 		this.jouable = jouable;
+	}
+
+	public boolean isArrivable() {
+		return arrivable;
+	}
+
+	public void setArrivable(boolean arrivable) {
+		this.arrivable = arrivable;
 	}
 
 }

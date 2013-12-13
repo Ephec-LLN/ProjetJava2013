@@ -29,7 +29,7 @@ public class Colonne {
 	
 	public void deletePion()
 	{
-		pions[compteur -1] = null;
+		pions[compteur - 1] = null;
 		compteur--;
 		if(compteur == 0) 
 		{
@@ -86,7 +86,7 @@ public class Colonne {
 	
 	public Pion getPion () 
 	{
-		return pions[compteur -1];
+		return pions[compteur - 1];
 	}
 
 	public String toString() 
