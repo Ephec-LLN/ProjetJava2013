@@ -6,7 +6,7 @@ public class Jeu {
 
 	public  int a,b;
 	public  Colonne[] plateau;
-	public Graphisme g;
+	public Graphisme2 g;
 	public int couleur;
 	private Joueur joueur1, joueur2;
 	
@@ -18,7 +18,7 @@ public class Jeu {
 		this.joueur1 = joueur1;
 		this.joueur2 = joueur2;
 		
-	    g = new Graphisme(a,b,plateau, joueur1, joueur2);
+	    g = new Graphisme2(a,b,plateau, joueur1, joueur2);
 		
 	}
 	public int getCouleur() {
@@ -45,10 +45,10 @@ public class Jeu {
 		
 		
 	}
-	public Graphisme getG() {
+	public Graphisme2 getG() {
 		return g;
 	}
-	public void setG(Graphisme g) {
+	public void setG(Graphisme2 g) {
 		this.g = g;
 	}
 	public int getA() {
