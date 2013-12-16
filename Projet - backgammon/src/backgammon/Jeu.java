@@ -8,7 +8,7 @@ package backgammon;
 public class Jeu {
 
 	public  Colonne[] plateau;
-	public Graphisme g;
+	public Graphisme2 g;
 	public int couleur;
 	private Joueur joueur1, joueur2;
 
@@ -26,7 +26,7 @@ public class Jeu {
 		this.plateau = plateau;
 		this.joueur1 = joueur1;
 		this.joueur2 = joueur2;
-		 g = new Graphisme(plateau, joueur1, joueur2);
+		 g = new Graphisme2(plateau, joueur1, joueur2);
 	}
 
 	/**
