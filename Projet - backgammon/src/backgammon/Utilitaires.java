@@ -75,8 +75,8 @@ public class Utilitaires {
 		{
 			plateau[colonne + cases].addPion(plateau[colonne].getPion(),1);
 			plateau[colonne].deletePion();
-			
-			
+
+
 			if(plateau[colonne].getCol1() ==  plateau[colonne].getNumero() + cases)
 			{
 				plateau[colonne + cases].addPion(plateau[colonne].getPion(),1);
@@ -98,28 +98,28 @@ public class Utilitaires {
 			plateau[colonne].deletePion();
 		}
 		return plateau;
-		
+
 
 	}
 
 	public static Colonne[] avance2(int colonne, int cases, Colonne [] plateau, int couleur) 
 	{
-		
-			Colonne[] plateau1 = plateau;
-			
-			switch (couleur)
-			{
-			case 1 : 	plateau1[colonne + cases -1].addPion(plateau[colonne].getPion(),couleur);
-						plateau1[colonne].deletePion(); break;
-						
-			case 2 :  	plateau1[colonne - cases +1].addPion(plateau[colonne].getPion(),couleur);
-						plateau1[colonne].deletePion();
-						System.out.println(plateau[colonne - cases +1].getCompteur());
-			}
-			return plateau1;
-		
+
+		Colonne[] plateau1 = plateau;
+
+		switch (couleur)
+		{
+		case 1 : 	plateau1[colonne + cases -1].addPion(plateau[colonne].getPion(),couleur);
+		plateau1[colonne].deletePion(); break;
+
+		case 2 :  	plateau1[colonne - cases +1].addPion(plateau[colonne].getPion(),couleur);
+		plateau1[colonne].deletePion();
+		System.out.println(plateau[colonne - cases +1].getCompteur());
+		}
+		return plateau1;
+
 	}
-	
+
 	public static void affiche (Colonne [] plateau) 
 	{
 		for (int i = 0; i < 26; i++) 
@@ -136,7 +136,7 @@ public class Utilitaires {
 	public static Colonne [] scannage (Colonne [] plateau, int couleur, int roll1, int roll2) 
 	{
 		Colonne[] retour = plateau;
-		
+
 		switch(couleur) {
 		case 1 : 
 			for (int i  = 0; i < 26; i++) 
@@ -163,8 +163,8 @@ public class Utilitaires {
 					}
 				}
 			}
-		break;
-		
+			break;
+
 		case 2 : 
 			for (int i  = 0; i < 26; i++) 
 			{
@@ -190,9 +190,9 @@ public class Utilitaires {
 					}
 				}
 			}
-			
-	}
+
+		}
 		return retour;
 	}
-	
+
 }

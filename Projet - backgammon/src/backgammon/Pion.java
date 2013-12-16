@@ -4,14 +4,14 @@ public class Pion {
 
 	private int couleur;
 	private int colonne;
-	
-	
+
+
 	public Pion(int couleur) 
 	{
 		this.setCouleur(couleur);
 	}
-	
-	
+
+
 	public int getColonne() 
 	{
 		return colonne;
@@ -30,6 +30,6 @@ public class Pion {
 	{
 		this.couleur = couleur;
 	}
-	
-	
+
+
 }

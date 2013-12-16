@@ -8,12 +8,12 @@ public class Joueur
 	private int pionsRetraites;
 	private int couleur;
 	private boolean jouable;
-	
+
 	public Joueur (String pseudonyme, int couleur) 
 	{
 		this.setPseudonyme(pseudonyme);
 		this.couleur = couleur;
-		
+
 	}
 
 	public int getCouleur() {
@@ -39,7 +39,7 @@ public class Joueur
 	public void setPionsActifs(int pionsActifs) {
 		this.pionsActifs = pionsActifs;
 	}
-	
+
 	public int getPionsRetraites() {
 		return pionsRetraites;
 	}

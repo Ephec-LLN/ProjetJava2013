@@ -28,7 +28,7 @@ public class Graphisme extends JFrame implements ActionListener{
 	private int couleur = 1;
 	private Joueur[] joueurs = new Joueur[2];
 	private boolean fini = false;
-	
+
 	public Graphisme (int a, int b, Colonne[] plateau, Joueur joueur1, Joueur joueur2)
 	{
 		this.a = a;
@@ -39,8 +39,8 @@ public class Graphisme extends JFrame implements ActionListener{
 		fen.setVisible(true);
 		joueurs[0] = joueur1;
 		joueurs[1] = joueur2;
-		
-		
+
+
 
 		// Boutons 
 
@@ -49,7 +49,7 @@ public class Graphisme extends JFrame implements ActionListener{
 		JPanel boutonsColonnes = new JPanel();
 		GridLayout boutonsLayout = new GridLayout(13,2);
 		boutonsColonnes.setLayout(boutonsLayout);
-		
+
 		for (int i = 0; i< 26; i++)
 		{
 			colonnes[i] = new JButton("Colonne : " + i);
@@ -57,7 +57,7 @@ public class Graphisme extends JFrame implements ActionListener{
 			colonnes[i].addActionListener(this);
 			colonnes[i].setEnabled(false);
 		}
-		
+
 		plateauGraphique.setText(affichage(plateau));
 
 		des = new JLabel(a + " " + b);
@@ -75,7 +75,7 @@ public class Graphisme extends JFrame implements ActionListener{
 		fen.setResizable(false);
 		this.pack();
 	}
-	
+
 
 	public int getA() {
 		return a;
@@ -111,7 +111,7 @@ public class Graphisme extends JFrame implements ActionListener{
 			if (plateau[i].getCouleur() == 1 ) {couleur = "blancs";}
 			if (plateau[i].getCouleur() == 2 ) {couleur = "noirs";}
 			String ligne = plateau[i].toString() + " : " + 
-			plateau[i].getCompteur() + " pions " + couleur + plateau[i].colonnesPossibles(plateau, this.couleur) + "\n" ;
+					plateau[i].getCompteur() + " pions " + couleur + plateau[i].colonnesPossibles(plateau, this.couleur) + "\n" ;
 			retour = retour + ligne;
 		}
 		return retour;
@@ -125,26 +125,26 @@ public class Graphisme extends JFrame implements ActionListener{
 			if (a == b) {c = 4;} else {c = 2;}
 			des.setText(a + " " + b);
 			System.out.println("Clic");
-			
+
 			plateau = Utilitaires.scannage(plateau, couleur, a, b);
 			boutonsAdaptation();
 			plateauGraphique.setText(affichage(plateau));
 			bouton1.setEnabled(false);
 		}
-	
+
 		for (int i = 1; i < 25; i++)
 		{
 			if (arg0.getSource() == colonnes[i])
 			{
 				Object[] options = {"Colonne " + plateau[i].getCol1(), "Colonne " + plateau[i].getCol2(), "Annuler"};
 				int n = JOptionPane.showOptionDialog(fen,
-					    "Sur quelle colonne voulez-vous dŽbarquer ? ", "Quelle case ?",
-					    	    JOptionPane.DEFAULT_OPTION,
-					    	    JOptionPane.QUESTION_MESSAGE,
-					    	    null,
-					    	    options,
-					    	    options[2]);
-				
+						"Sur quelle colonne voulez-vous dŽbarquer ? ", "Quelle case ?",
+						JOptionPane.DEFAULT_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						options,
+						options[2]);
+
 				if (n == 0) 
 				{
 					if (couleur == 1) {plateau = Utilitaires.avance2(i, (a + 1), plateau, couleur);}
@@ -165,7 +165,7 @@ public class Graphisme extends JFrame implements ActionListener{
 					c--;
 					boutonsAdaptation();
 				}
-				
+
 			}
 		}
 	} 
@@ -176,7 +176,7 @@ public class Graphisme extends JFrame implements ActionListener{
 		{
 			if(Utilitaires.avancable(i, plateau) && plateau[i].getCouleur() == couleur) {colonnes[i].setEnabled(true);}
 			else {colonnes[i].setEnabled(false);}
-			
+
 		}
 		if (c == 0) 
 		{
@@ -191,13 +191,13 @@ public class Graphisme extends JFrame implements ActionListener{
 	{
 		switch(couleur)
 		{
-		 	case 1 : couleur = 2; break;
-		 	case 2 : couleur = 1;
+		case 1 : couleur = 2; break;
+		case 2 : couleur = 1;
 		}
 		bouton1.setEnabled(true);
-		
+
 		plateauGraphique.setText(affichage(plateau));
 	}
-	
-	
+
+
 }
