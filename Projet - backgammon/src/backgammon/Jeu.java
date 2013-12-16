@@ -1,7 +1,7 @@
-/*
+/**
  * @author : Amellal Ibrahim & Seynaeve Jonathan
  * 
- * Classe Jeu, contenant les données nécessaires pour démarrer une partie.
+ * Classe Jeu, contenant les données necessaires pour demarrer une partie.
  */
 package backgammon;
 
@@ -12,13 +12,13 @@ public class Jeu {
 	public int couleur;
 	private Joueur joueur1, joueur2;
 
-	/*
+	/**
  	* Constructeur de classe Jeu
  	*  @param plateau : Tableau de 26 colonnes
  	*  @param joueur1 : Premier joueur, couleur blanche
  	*  @param joueur2 : Second joueur, couleur noire
  	*  
- 	*  La méthode instancie une instance de la classe Graphisme
+ 	*  La methode instancie une instance de la classe Graphisme
  	*/
 	public Jeu (Colonne [] plateau, Joueur joueur1, Joueur joueur2) 
 	{
@@ -29,10 +29,10 @@ public class Jeu {
 		 g = new Graphisme(plateau, joueur1, joueur2);
 	}
 
-	/*
-	 * Méthode static void main 
+	/**
+	 * Methode static void main 
 	 * 
-	 * Initialise 2 joueurs, un plateau de jeu, ainis qu'une instance de Jeu
+	 * Initialise 2 joueurs, un plateau de jeu, ainsi qu'une instance de Jeu
 	 */
 	public static void main(String[] args) {
 		Joueur joueur1 = new Joueur("Amellal Lecteur", 1);

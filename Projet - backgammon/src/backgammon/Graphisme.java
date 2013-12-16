@@ -11,7 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-
+/**
+ * 
+ * @author Amellal Ibrahim & Seynaeve Jonathan
+ * Classe contenant l'interface graphique et des methodes associees
+ */
 
 
 public class Graphisme extends JFrame implements ActionListener{
@@ -31,6 +35,12 @@ public class Graphisme extends JFrame implements ActionListener{
 	private Joueur[] joueurs = new Joueur[2];
 	private boolean fini = false;
 
+	/**
+	 * Constructeur
+	 * @param plateau plateau de 26 colonnes
+	 * @param joueur1 Joueur 1
+	 * @param joueur2 Joueur 2
+	 */
 	public Graphisme (Colonne[] plateau, Joueur joueur1, Joueur joueur2)
 	{
 
@@ -73,7 +83,12 @@ public class Graphisme extends JFrame implements ActionListener{
 		fen.setResizable(false);
 		this.pack();
 	}
-
+	/**
+	 * Methode servant a afficher le plateau sous forme de terminal textuel, utile pour les developpeurs
+	 * @param plateau plateau de 26 colonnes
+	 * @return retourne un champ de texte avec affiche le nom du joueur concerne, 
+	 * les colonnes avec les pions dessus et les cases dispos
+	 */
 	public  String affichage (Colonne [] plateau) 
 	{
 		String retour = "C'est au tour de : " + joueurs[couleur - 1].getPseudonyme() + " de jouer \n";
@@ -91,10 +106,18 @@ public class Graphisme extends JFrame implements ActionListener{
 		retour += "Pions noirs arrivés : " + joueurs[1].getPionsRetraites() + "\n";
 		return retour;
 	}
+	/**
+	 * Accesseurs aux donnees des joueurs
+	 * @return
+	 */
 	public Joueur[] getJoueurs() {
 		return joueurs;
 	}
-
+	/**
+	 * Listener
+	 * 
+	 */
+	
 	public void actionPerformed(ActionEvent arg0) {      
 		if (arg0.getSource() == bouton1) {
 
@@ -145,6 +168,9 @@ public class Graphisme extends JFrame implements ActionListener{
 			}
 		}
 	} 
+	/**
+	 * Methode mettant a jour les boutons des colonnes
+	 */
 	public void boutonsAdaptation () 
 	{
 
@@ -179,6 +205,9 @@ public class Graphisme extends JFrame implements ActionListener{
 		}
 
 	}
+	/**
+	 * Methode passant le tour a l'ennemi
+	 */
 	public void passageTour()
 	{
 		switch(couleur)

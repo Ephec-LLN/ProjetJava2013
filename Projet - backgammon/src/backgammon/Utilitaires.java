@@ -1,9 +1,16 @@
+/**
+ * @author Amellal Ibrahim & Jonathan Seynaeve
+ */
 package backgammon;
 import java.util.Random;
 
 
 public class Utilitaires {
 
+	/**
+	 * Initialisateur 
+	 * @return Retour un plateau avec des pions places sur chaque colonne
+	 */
 	public static Colonne [] initialisation () 
 	{
 		Colonne [] plateau = new Colonne[26];
@@ -55,20 +62,36 @@ public class Utilitaires {
 
 		return plateau;
 	}
-
+	/**
+	 * Methode generant un nombre entre 1 et 6
+	 * @return un nombre entre 1 et 6 compris
+	 */
 	public static int roll() 
 	{
 		Random rnd = new Random();
 		return (rnd.nextInt(6) + 1);
 	}
-
+	/**
+	 * Methode dŽterminant si le joueur peut avancer a la colonne a
+	 * @param a Numero de la colonne
+	 * @param plateau plateau de jeu
+	 * @param joueur Joueur en question
+	 * @return true si il peut y aller false sinon
+	 */
 	public static boolean avancable (int a, Colonne [] plateau, Joueur joueur) 
 	{
 		if (a > 25) {return joueur.isArrivable();} 
 		if (a < 0) {return joueur.isArrivable();} 
 		return plateau[(a)].getDisponible(plateau[a].getCouleur());
 	}
-
+	/**
+	 * Methode retournant un plateau avec le pion avance a la place demandee
+	 * @param colonne Numero de la colonne actuelle
+	 * @param cases Nombre de cases desirees
+	 * @param plateau plateau
+	 * @param joueur joueur en cours
+	 * @return plateau mis a jour
+	 */
 	public static Colonne[] avance(int colonne, int cases, Colonne [] plateau, Joueur joueur) 
 	{
 
@@ -103,9 +126,14 @@ public class Utilitaires {
 		}
 		return plateau1;
 	}
-
-
-
+	/**
+	 * Methode renvoyant un plateau avec les colonnes jouables mises a jour apres coup de des
+	 * @param plateau plateau de 26 colonnes
+	 * @param joueur joueur
+	 * @param roll1 Score du de 1
+	 * @param roll2 Score du de 2
+	 * @return plateau mis a jour
+	 */
 	public static Colonne [] scannage (Colonne [] plateau, Joueur joueur, int roll1, int roll2) 
 	{
 		Colonne[] retour = plateau;
@@ -165,7 +193,13 @@ public class Utilitaires {
 		}
 		return retour;
 	}
-	
+	/**
+	 * Methode renvoyant un tableau avec le pion renvoye a la case depart sans passer par la prison et sans toucher les 20000 Francs
+	 * @param plateau plateau de 26 colonnes
+	 * @param colonne colonne sur laquelle se trouve le pion a ejecter
+	 * @param couleur couleur du joueur
+	 * @return le plaeau mis a jour
+	 */
 	public static  Colonne[] caseDepart(Colonne [] plateau, int colonne, int couleur) 
 	{
 		Colonne [] plateau1 = plateau;
