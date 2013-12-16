@@ -8,7 +8,7 @@ public class Joueur
 	private int pionsRetraites;
 	private int couleur;
 	private boolean jouable;
-	private boolean arrivable = true;
+	private boolean arrivable = false;
 	
 	public Joueur (String pseudonyme, int couleur) 
 	{
@@ -49,7 +49,25 @@ public class Joueur
 		this.pionsRetraites = pionsRetraites;
 	}
 
-	public boolean isJouable() {
+	public boolean isJouable(Colonne [] plateau) {
+		jouable = false;
+		
+		  if (couleur == 1 && plateau[0].getCompteur() > 0) {jouable = plateau[0].isAmovible(this);} 
+		else {
+		for(int i = 0; i < 26; i++)
+		{
+			if(plateau[i].isAmovible(this)) {jouable = true; break;}
+			
+		}}
+		if (couleur == 2 && plateau[25].getCompteur() > 0) {jouable = plateau[25].isAmovible(this);} 
+		else {
+		for(int i = 0; i < 26; i++)
+		{
+			if(plateau[i].isAmovible(this)) {jouable = true; break;}
+			
+		}}
+		 
+		
 		return jouable;
 	}
 
